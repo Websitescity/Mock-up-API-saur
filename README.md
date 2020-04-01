@@ -1,6 +1,6 @@
 # Mock-up-api-saur
 
-![http://github.michalrafalski.com/mockupapisaur.png](Mock-up-api-saur)
+![http://github.michalrafalski.com/mockupapisaur.png](http://github.michalrafalski.com/mockupapisaur.png)
 
 ## Requirements
 
