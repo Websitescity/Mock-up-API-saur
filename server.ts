@@ -3,18 +3,18 @@ import * as jsonServer from "json-server";
 import * as mockupData from "./data";
 import * as auth from "json-server-auth";
 import * as dotenv from "dotenv";
+import * as users from "./db/db.json";
 import customRoutes from "./config/customRoutes";
 
 const server = jsonServer.create();
-const routerData = jsonServer.router(mockupData);
 const middlewares = jsonServer.defaults();
-
-const routerAuth = jsonServer.router("./db/db.json");
+const endpoints: any = Object.assign({}, mockupData, users);
+const router = jsonServer.router(endpoints);
 
 dotenv.config();
 
 // @ts-ignore
-server.db = routerAuth.db;
+server.db = router.db;
 
 server.use(auth);
 
@@ -22,9 +22,7 @@ server.use(jsonServer.rewriter(customRoutes));
 server.use(middlewares);
 
 const port: number = process.env.PORT ? parseInt(process.env.PORT) : 1234;
-
-server.use(routerAuth);
-server.use(routerData);
+server.use(router);
 
 server.listen(port, () => {
   console.log(welcome(port));
