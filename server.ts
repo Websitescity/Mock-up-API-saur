@@ -16,10 +16,10 @@ dotenv.config();
 // @ts-ignore
 server.db = router.db;
 
-server.use(auth);
 
 server.use(jsonServer.rewriter(customRoutes));
 server.use(middlewares);
+server.use(auth);
 
 const port: number = process.env.PORT ? parseInt(process.env.PORT) : 1234;
 server.use(router);
