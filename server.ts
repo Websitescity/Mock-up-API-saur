@@ -16,6 +16,17 @@ dotenv.config();
 // @ts-ignore
 server.db = router.db;
 
+// More about restrict access https://www.npmjs.com/package/json-server-auth#guarded-routes-
+const accessRules = auth.rewriter({
+  
+  //User must be logged to write or read the resource.
+  dinosaursfood: 660,
+  
+  // No one can write the resource. Everyone can read the resource.
+  dinosaurs: 444
+})
+
+server.use(accessRules)
 
 server.use(jsonServer.rewriter(customRoutes));
 server.use(middlewares);
